@@ -9,9 +9,6 @@ $ curl http://127.0.0.1:5001 -X POST -H "Content-Type: application/json"  -d '{"
 WARNING: CMD prompt does not support quotes, use \" instead
 """
 
-import json
-import logging
-import os.path
 import pickle
 
 import pandas as pd
@@ -44,7 +41,6 @@ def index():
     args = request.json
     filt_args = {key: [int(args[key])] for key in FEATURES}
     df = pd.DataFrame.from_dict(filt_args)
-    logging.info("User values: %s", filt_args)
 
     # prediction
     path = 'homework/house_predictor.pkl'
@@ -57,4 +53,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True)
